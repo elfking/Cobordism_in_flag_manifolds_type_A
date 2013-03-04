@@ -68,7 +68,12 @@ def A2(P):
 def A3(P):
         return (P/u23 + T3(P)/u32).simplify_full()
         
-
+D = [A1,A2,A3]
+def Demazure(list, P):
+		for i in range(len(list)):
+			temp = D[list[i]-1](P)
+		return temp.simplify_full()
+		
 Pempty = (z00*z01*z02*z10*z11*z20)
 ##Test case 2: s2*s3*s2  :  [[2, 3, 2], [3, 2, 3]]
 #print (A2(A3(A2(Pempty))) - A3(A2(A3(Pempty)))).simplify_full()
@@ -78,4 +83,13 @@ Pempty = (z00*z01*z02*z10*z11*z20)
 ##Test case 4: s1*s2*s3*s1*s2*s1  :  [1, 2, 3, 1, 2, 1],[2, 1, 2, 3, 2, 1]
 #print (A1(A2(A3(A1(A2(A1(Pempty))))))-A2(A1(A2(A3(A2(A1(Pempty))))))).simplify_full()
 # = something horrible. for the long word it takes about 7 minutes.
+
+AList = []
+
+for i in (e_w0):
+		AList+= i.reduced_words() 
+print AList
+for i in AList:
+		print "Z", i , " = ", Demazure(i,Pempty)
+	
 print time.time() - T
