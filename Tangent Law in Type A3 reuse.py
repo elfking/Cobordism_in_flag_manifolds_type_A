@@ -54,12 +54,12 @@ u32 = oplus(x3,-x2)
 
 def T1(P):
         temp(x0,x1,x2,x3) = P
-	return temp(x1,x0,x2,x3)
+		return temp(x1,x0,x2,x3)
 def T2(P):
-	temp(x0,x1,x2,x3) = P
+		temp(x0,x1,x2,x3) = P
         return temp(x0,x2,x1,x3)
 def T3(P):
-	temp(x0,x1,x2,x3) = P
+		temp(x0,x1,x2,x3) = P
         return temp(x0,x1,x3,x2)
 def A1(P):
         return (P/u01 + T1(P)/u10).simplify_full()
@@ -94,7 +94,7 @@ RList = [Pempty]
 for i in AList[1:]:
 		itemp = i[1:]
 		P = RList[AList.index(itemp)]
-		RList.append(D[i[0]-1](P))		
+		RList.append(D[i[0]-1](P).simplify_full())		
 
 
 for i in range(len(AList)):
