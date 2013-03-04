@@ -98,6 +98,6 @@ for i in AList[1:]:
 
 
 for i in range(len(AList)):
-		print "Z", AList[i] , " = ", Rlist[i]
+		print "Z", AList[i] , " = ", RList[i]
 	
 print "Took ", time.time() - T
