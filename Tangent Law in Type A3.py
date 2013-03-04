@@ -73,9 +73,10 @@ def foo():
 			
 	D = [A1,A2,A3]
 	def Demazure(list, P):
-                        list.reverse()
+			temp = P
+            list.reverse()
 			for i in range(len(list)):
-				temp = D[list[i]-1](P)
+				temp = D[list[i]-1](temp)
 			return temp.simplify_full()
 			
 	Pempty = (z00*z01*z02*z10*z11*z20)
