@@ -1,0 +1,102 @@
+import time
+
+T = time.time()
+
+n = 3
+
+#R1 = PolynomialRing(ZZ,'y',3)
+#F1 = FractionField(R1)
+#R2 = PolynomialRing(F1,'x',3)
+#F2 = FractionField(R2)
+##Inject the variables so can use names
+#R1.injvar()
+#R2.injvar()
+#PP = PositiveIntegers() ##The positive integers
+#schur = SymmetricFunctions(ZZ).s() ##Define the ring of symmetric functions L
+#I =R2.ideal([R2(schur([n]).expand(3,alphabet='x'))-R2(schur([n]).expand(3,alphabet='y')) for n in range(1,5)])
+#S = R2.quotient(I)
+
+### equivariant cohomology
+x = []
+y = []
+for i in range(n):
+	x.append('x' + str(i))
+	y.append('y' + str(i))
+z = []
+u = []
+
+for i in range(n):
+        z.append([])
+        u.append([])
+	for j in range(n):
+                zed = 'z' + str(i) + str(j)
+                you = 'u' + str(i) + str(j)
+                z[-1] += [zed]
+                u[-1] += [you]
+for i in range(len(x)):
+	x[i] = var(x[i])
+	y[i] = var(y[i])
+for i in range(n):
+	for j in range(n):
+		z[i][j] = var(z[i][j])
+		u[i][j] = var(u[i][j])
+print x, y , z, u
+#S = PolynomialRing(SR,n,x)
+f = (1 + x0 + x0^2 - x1^2 + 3*x2^2)
+#print type(f)
+nList = range(1,n+1)
+#print nList
+tranList = []
+for i in range(n-1):
+    temp = nList[:]
+    temp[i] = i+2
+    temp[i+1] = i+1
+    tranList.append(temp)
+#print "This is tranList: ", tranList
+#T = []
+#for i in range(n-1):
+#    T+=[Permutation(tranList[i])]
+var('a,b')
+def oplus(a,b):
+    return a + b
+#z00 = oplus(x0,y0/(2*y0-1))
+#z01 = oplus(x0,y1/(2*y1-1))
+#z02 = oplus(x0,y2/(2*y2-1))
+#z03 = oplus(x0,-y3)
+#z10 = oplus(x1,y0/(2*y0-1))
+#z11 = oplus(x1,y1/(2*y1-1))
+#z12 = oplus(x1,y2/(2*y2-1))
+#z13 = oplus(x1,-y3)
+#z20 = oplus(x2,y0/(2*y0-1))
+#z21 = oplus(x2,y1/(2*y1-1))
+#z22 = oplus(x2,y2/(2*y2-1))
+#z23 = oplus(x2,-y3)
+#z30 = oplus(x3,-y0)
+#z31 = oplus(x1,-y1)
+#u01 = oplus(x0,x1/(2*x1-1))
+#u10 = oplus(x1,x0/(2*x0-1))
+#u12 = oplus(x1,x2/(2*x2-1))
+#u21 = oplus(x2,x1/(2*x1-1))
+
+def T1(P):
+        temp(z00,z01,z02,z10,z11,z12,z20,z21,z22,u01,u10,u12,u21,u02,u20) = P
+	return temp(z10,z11,z12,z00,z01,z02,z20,z21,z22,u10,u01,u02,u20,u12,u21)
+def T2(P):
+	temp(z00,z01,z02,z10,z11,z12,z20,z21,z22,u01,u10,u12,u21,u02,u20) = P
+	return temp(z00,z01,z02,z20,z21,z22,z10,z11,z12,u02,u20,u21,u12,u01,u10)
+def A1(P):
+        return (P/u01 + T1(P)/u10)
+def A2(P):
+        return (P/u12 + T2(P)/u21)
+
+Pempty = (z00*z01*z10); print (Pempty)
+#print ((A1(A2(A1(Pempty)))-A2(A1(A2(Pempty)))).simplify_full())
+Z121(z00,z01,z02,z10,z11,z12,z20,z21,z22,u01,u10,u12,u21,u02,u20) = A1(A2(A1(Pempty))).simplify_full()
+Z212(z00,z01,z02,z10,z11,z12,z20,z21,z22,u01,u10,u12,u21,u02,u20) = A2(A1(A2(Pempty))).simplify_full()
+print "It works"
+#print (A2(A1(A2(A1(Pempty)))).simplify_full())
+#print T1(z00-z01+z02-u02^2-z11^2+u12*z12)
+print Z121(oplus(x0,-y0),oplus(x0,-y1),oplus(x0,-y2),oplus(x1,-y0),oplus(x1,-y1),oplus(x1,-y2),oplus(x2,-y0),oplus(x2,-y1),oplus(x2,-y2),oplus(x0,-x1),oplus(x1,-x0),oplus(x1,-x2),oplus(x2,-x1),oplus(x0,-x2),oplus(x2,-x0)).simplify_full()
+print Z212(oplus(x0,-y0),oplus(x0,-y1),oplus(x0,-y2),oplus(x1,-y0),oplus(x1,-y1),oplus(x1,-y2),oplus(x2,-y0),oplus(x2,-y1),oplus(x2,-y2),oplus(x0,-x1),oplus(x1,-x0),oplus(x1,-x2),oplus(x2,-x1),oplus(x0,-x2),oplus(x2,-x0)).simplify_full()
+
+print time.time() - T
