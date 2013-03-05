@@ -1,4 +1,7 @@
 ##Tangent law
+#import operator
+#from sage.symbolic.expression_conversions import PolynomialConverter
+
 import time, numpy
 
 T = time.time()
@@ -35,7 +38,7 @@ e_w0 = W.bruhat_interval(e,w0); e_w0
 #var('x0,x1,x2,x3,y0,y1,y2,y3')
 x = []
 y = []
-for i in range(3):
+for i in range(n):
 	x.append('x' + str(i))
 	y.append('y' + str(i))
 z = []
